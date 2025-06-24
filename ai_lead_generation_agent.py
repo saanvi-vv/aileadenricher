@@ -18,7 +18,7 @@ with st.sidebar:
     st.markdown("### 📬 Contact Me")
     st.markdown("[GitHub](https://github.com/justrohan29)")
     st.markdown("[LinkedIn](https://www.linkedin.com/in/rohnis/)")
-    st.markdown("[📄 Download Resume](https://your-resume-link.com)", unsafe_allow_html=True)
+    st.markdown("[📄 Download Resume](https://flowcv.com/resume/8q83wa073v)", unsafe_allow_html=True)
 FIRECRAWL_API_KEY = st.secrets["FIRECRAWL_API_KEY"]
 GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 
