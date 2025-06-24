@@ -2,6 +2,7 @@
 
 This project is a Streamlit-based web application that allows RevOps teams, startup founders, and growth strategists to automatically extract and enrich data about SaaS companies using cutting-edge AI. It combines [Firecrawl](https://firecrawl.dev/) for content extraction and [Gemini 2.0 Flash](https://ai.google.dev/) for language understanding to generate high-quality summaries of what each company does — all without writing a single prompt or scraping content manually.
 
+TRY IT OUT AT: https://lead-enricher.streamlit.app/
 ---
 
 ## 🧩 Why This Project
