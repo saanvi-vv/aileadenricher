@@ -26,6 +26,15 @@ Revenue Operations (RevOps) teams often spend hours researching leads manually, 
 
 ---
 
+## 🧠 Prompt Strategy
+
+We use Gemini 2.0 Flash with dynamic prompts based on user-selected tone. Example:
+
+> "Summarize what this SaaS company does in a **conversational** tone based on the following homepage content..."
+
+
+---
+
 ## 🛠️ Tech Stack
 
 | Layer           | Tool / Framework                      |
