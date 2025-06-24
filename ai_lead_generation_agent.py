@@ -7,8 +7,10 @@ import os
 # --- Streamlit UI ---
 st.title("🚀 AI-Powered Lead Enrichment Agent")
 st.write("Enter SaaS company websites. We'll extract homepage content and summarize what each company does using Gemini.")
+st.badge("Psst... the secret controls are hiding in the sidebar 👀")
 
 with st.sidebar:
+    st.markdown("---")
     tone = st.selectbox(
     "🗣️ Choose summary tone",
     ["Concise", "Conversational", "Salesy", "Technical"],
