@@ -9,10 +9,19 @@ st.title("🚀 AI-Powered Lead Enrichment Agent")
 st.write("Enter SaaS company websites. We'll extract homepage content and summarize what each company does using Gemini.")
 
 with st.sidebar:
-    st.header("enter api keys:")
-    st.write("You can get your API keys from the respective platforms.")
-    FIRECRAWL_API_KEY = st.text_input("Firecrawl API Key", type="password")
-    GEMINI_API_KEY = st.text_input("Gemini API Key", type="password")
+    tone = st.selectbox(
+    "🗣️ Choose summary tone",
+    ["Concise", "Conversational", "Salesy", "Technical"],
+    index=0
+    )
+    st.markdown("---")
+    st.markdown("### 📬 Contact Me")
+    st.markdown("[GitHub](https://github.com/justrohan29)")
+    st.markdown("[LinkedIn](https://www.linkedin.com/in/rohnis/)")
+    st.markdown("[📄 Download Resume](https://your-resume-link.com)", unsafe_allow_html=True)
+FIRECRAWL_API_KEY = st.secrets["FIRECRAWL_API_KEY"]
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+
 
 
 urls_input = st.text_area("Enter website URLs (one per line)")
@@ -51,7 +60,9 @@ if run_button and urls_input and FIRECRAWL_API_KEY and GEMINI_API_KEY:
                 content = response.extract["content"]
 
                 # Summarize with Gemini
-                prompt = f"Summarize what this SaaS company does based on the following homepage content:\n\n{content}"
+                prompt = f"""Summarize what this SaaS company does in a {tone.lower()} tone based on the following homepage content:
+                {content}
+                """
                 summary = model.generate_content(prompt).text.strip()
 
                 results.append({"Website": url, "Summary": summary})
