@@ -1,0 +1,5 @@
+streamlit
+google-generativeai
+firecrawl
+pandas
+python-dotenv
