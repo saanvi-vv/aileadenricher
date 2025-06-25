@@ -4,7 +4,6 @@ import google.generativeai as genai
 from firecrawl import FirecrawlApp
 import os
 
-# --- Streamlit UI ---
 st.title("🚀 AI-Powered Lead Enrichment Agent")
 st.write("Enter SaaS company websites. We'll extract homepage content and summarize what each company does using Gemini.")
 st.badge("Psst... the secret controls are hiding in the sidebar 👀")
@@ -30,11 +29,9 @@ urls_input = st.text_area("Enter website URLs (one per line)")
 run_button = st.button("Enrich Leads")
 
 if run_button and urls_input and FIRECRAWL_API_KEY and GEMINI_API_KEY:
-    # Configure Gemini
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("models/gemini-2.0-flash")
 
-    # Set up Firecrawl
     firecrawl = FirecrawlApp(api_key=FIRECRAWL_API_KEY)
 
     urls = [u.strip() for u in urls_input.splitlines() if u.strip()]
@@ -58,10 +55,8 @@ if run_button and urls_input and FIRECRAWL_API_KEY and GEMINI_API_KEY:
                     }
                 )
 
-                # Access the content from the response object
                 content = response.extract["content"]
 
-                # Summarize with Gemini
                 prompt = f"""Summarize what this SaaS company does in a {tone.lower()} tone based on the following homepage content:
                 {content}
                 """
