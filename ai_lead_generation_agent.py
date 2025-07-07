@@ -5,7 +5,7 @@ from firecrawl import FirecrawlApp
 import os
 
 st.title("🚀 AI-Powered Lead Enrichment Agent")
-st.write("Enter SaaS company websites. We'll extract homepage content and summarize what each company does using Gemini.")
+st.write("Enter company websites. We'll extract homepage content and summarize what each company does using Gemini.")
 st.badge("Psst... the secret controls are hiding in the sidebar 👀")
 
 with st.sidebar:
@@ -44,7 +44,17 @@ if run_button and urls_input and FIRECRAWL_API_KEY and GEMINI_API_KEY:
                     url=url,
                     formats=["extract"],
                     extract={
-                        "prompt": "Extract the homepage content of this SaaS company.",
+                        "prompt": """You are extracting homepage content from a company website that may belong to sectors like manufacturing, energy, infrastructure, metals, or cement. 
+                                        Extract all textual content from the homepage that explains:
+                                        - What the company does
+                                        - Its product or service offerings
+                                        - Industries served
+                                        - Technologies or processes used
+                                        - Sustainability or innovation highlights
+                                        - Any major clients, projects, or markets mentioned
+
+                                        Ensure the extracted content is clean and complete, ignoring navigation bars, cookie banners, and footers.""",
+
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -57,7 +67,22 @@ if run_button and urls_input and FIRECRAWL_API_KEY and GEMINI_API_KEY:
 
                 content = response.extract["content"]
 
-                prompt = f"""Summarize what this SaaS company does in a {tone.lower()} tone based on the following homepage content:
+                prompt = f"""
+You are an expert B2B company analyst. Based on the extracted homepage content below, summarize what this company does. 
+The company is **not SaaS** — it may belong to industries like metals, infrastructure, energy, cement, or heavy manufacturing.
+
+Generate the summary in a **{tone.lower()}** tone and include as much detail as possible.
+
+Respond in the following format:
+
+**Company Overview**: What does the company do?
+**Key Offerings**: List major products, services, or capabilities.
+**Industries Served**: Which sectors or markets do they cater to?
+**Technologies or Expertise**: Highlight any advanced processes, R&D, or innovations.
+**Strategic Edge**: What makes this company unique?
+**Sustainability/CSR**: Mention any sustainability or impact initiatives if stated.
+
+Homepage content:
                 {content}
                 """
                 summary = model.generate_content(prompt).text.strip()
